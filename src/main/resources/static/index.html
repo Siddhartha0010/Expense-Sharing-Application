@@ -219,7 +219,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const API = 'http://localhost:8080/api';
+        const API = '/api';
 
         function App() {
             const [tab, setTab] = React.useState('users');
@@ -322,14 +322,21 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ name: userName, email: userEmail, phone: userPhone })
                     });
-                    if (res.ok) {
-                        showMessage('User created successfully!', 'success');
-                        setUserName(''); setUserEmail(''); setUserPhone('');
-                        fetchUsers();
-                    }
+                    if (!res.ok) {
+                         throw new Error('Failed to create user');    
+                        }
+
+                     showMessage('User created successfully!', 'success');
+                     setUserName('');
+                     setUserEmail('');
+                     setUserPhone('');
+                     fetchUsers();
+
                 } catch (err) {
-                    showMessage('Error creating user', 'error');
-                }
+                            console.error(err);
+                            showMessage('Error creating user', 'error');
+                    }
+
             };
 
             const handleMemberSelect = (userId) => {
