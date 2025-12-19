@@ -103,5 +103,15 @@ function App() {
     </div>
   );
 }
+{tab!=='users' && (
+  <div className="card">
+    <h3>{tab.toUpperCase()}</h3>
+    <p style={{color:'#666'}}>
+      UI intentionally minimal.  
+      This section is handled via backend APIs.
+    </p>
+  </div>
+)}
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
